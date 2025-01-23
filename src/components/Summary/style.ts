@@ -49,9 +49,9 @@ export const SummaryCard = styled.div<SummaryCardProps>`
 `
 
 interface PriceHighlightProps{
-    variants?: "icome" | "outcome"
+    variants?: "income" | "outcome"
 }
 
 export const PriceHighlight = styled.span<PriceHighlightProps>`
-    color: ${props=>props.variants === "icome" ? props.theme["green-300"] : props.theme["red-300"]};
+    color: ${props=>props.variants === "income" ? props.theme["green-300"] : props.theme["red-300"]};
 `

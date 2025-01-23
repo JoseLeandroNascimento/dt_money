@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 import { PriceHighlight } from "../../components/Summary/style";
@@ -5,7 +6,26 @@ import { SearchForm } from "./components/SearchForm";
 import { TransactionalContainer, TransactionalTable } from "./style";
 
 
+interface Transaction {
+    id: number,
+    description: string,
+    type: "income" | "outcome",
+    price: number,
+    category: string,
+    createAt: string
+}
+
 export function Transactions() {
+
+    const [transactions, setTransactions] = useState<Transaction[]>([])
+
+    useEffect(() => {
+        fetch("http://localhost:3000/transactions").then(response => {
+            return response.json()
+        }).then(data => {
+            setTransactions(data)
+        })
+    }, [])
 
     return (
         <div>
@@ -13,23 +33,24 @@ export function Transactions() {
             <Summary />
             <TransactionalContainer>
                 <SearchForm>
-                    
+
                 </SearchForm>
                 <TransactionalTable>
                     <tbody>
-                        <tr>
-                            <td width="50%">Desenvovimento de site</td>
-                            <td><PriceHighlight  variants="icome">R$ 12.000,00</PriceHighlight></td>
-                            <td>Venda</td>
-                            <td>13/04/2024</td>
-                        </tr>
-
-                        <tr>
-                            <td width="50%">Hamburger</td>
-                            <td><PriceHighlight variants="outcome">- R$ 590,00</PriceHighlight></td>
-                            <td>Alimentação</td>
-                            <td>10/04/2024</td>
-                        </tr>
+                        {
+                            transactions.map(transaction => (
+                                <tr key={transaction.id}>
+                                    <td width="50%">{transaction.description}</td>
+                                    <td>
+                                        <PriceHighlight variants={transaction.type}>
+                                            {transaction.price}
+                                        </PriceHighlight>
+                                    </td>
+                                    <td>{transaction.category}</td>
+                                    <td>{transaction.createAt}</td>
+                                </tr>
+                            ))
+                        }
 
                     </tbody>
                 </TransactionalTable>
