@@ -2,10 +2,10 @@
 import { ArrowCircleDown, ArrowCircleUp, X } from "@phosphor-icons/react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { Controller, useForm } from "react-hook-form"
+import { useContextSelector } from "use-context-selector"
 import * as z from "zod"
-import { CloseButton, Content, Overlay, TransactionType, TransactionTypeButton } from "./style"
-import { useContext } from "react"
 import { TransactionContext } from "../../contexts/TransactionsContext"
+import { CloseButton, Content, Overlay, TransactionType, TransactionTypeButton } from "./style"
 
 const newTransactionModalShema = z.object({
     description: z.string(),
@@ -18,7 +18,9 @@ type NewTransactionModalInputs = z.infer<typeof newTransactionModalShema>
 
 export function NewTransactionModal() {
 
-    const {createTransaction} = useContext(TransactionContext)
+    const createTransaction = useContextSelector(TransactionContext, (context) => {
+        return context.createTransaction
+    })
 
     const {
         control,
@@ -34,7 +36,7 @@ export function NewTransactionModal() {
     async function handleCreateNewTransaction(data: NewTransactionModalInputs) {
 
         createTransaction(data)
-       
+
         reset()
 
     }
