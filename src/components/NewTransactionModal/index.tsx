@@ -1,9 +1,11 @@
 
-import * as Dialog from "@radix-ui/react-dialog"
-import { CloseButton, Content, Overlay, TransactionType, TransactionTypeButton } from "./style"
 import { ArrowCircleDown, ArrowCircleUp, X } from "@phosphor-icons/react"
-import * as z from "zod"
+import * as Dialog from "@radix-ui/react-dialog"
 import { Controller, useForm } from "react-hook-form"
+import * as z from "zod"
+import { CloseButton, Content, Overlay, TransactionType, TransactionTypeButton } from "./style"
+import { useContext } from "react"
+import { TransactionContext } from "../../contexts/TransactionsContext"
 
 const newTransactionModalShema = z.object({
     description: z.string(),
@@ -16,20 +18,27 @@ type NewTransactionModalInputs = z.infer<typeof newTransactionModalShema>
 
 export function NewTransactionModal() {
 
+    const {createTransaction} = useContext(TransactionContext)
+
     const {
         control,
         register,
         handleSubmit,
         formState: {
             isSubmitting
-        }
+        },
+        reset
     } = useForm<NewTransactionModalInputs>()
 
 
-    function handleCreateNewTransaction(data: NewTransactionModalInputs) {
-        console.log(data);
+    async function handleCreateNewTransaction(data: NewTransactionModalInputs) {
+
+        createTransaction(data)
+       
+        reset()
 
     }
+
     return (
         <Dialog.Portal>
             <Overlay />
@@ -47,7 +56,7 @@ export function NewTransactionModal() {
                     <Controller
                         control={control}
                         name="type"
-                        render={({field}) => {
+                        render={({ field }) => {
                             return (
                                 <TransactionType onChange={field.onChange} value={field.value}>
                                     <TransactionTypeButton value="income" variants="income">

@@ -1,21 +1,52 @@
 {
-
-    "transactions": [
-        {
-            "id": 1,
-            "description":"Desenvolvimento de site",
-            "type": "income",
-            "category": "Venda",
-            "price": 140000,
-            "createAt": "2025-01-22T01:12:24.606Z"
-        },
-        {
-            "id": 2,
-            "description":"Hamburger",
-            "type": "outcome",
-            "category": "Alimentação",
-            "price": 50,
-            "createAt": "2025-01-19T01:12:24.606Z"
-        }
-    ]
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de site",
+      "type": "income",
+      "category": "Venda",
+      "price": 140000,
+      "createdAt": "2025-01-22T01:12:24.606Z"
+    },
+    {
+      "id": 2,
+      "description": "Hamburger",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 50,
+      "createdAt": "2025-01-19T01:12:24.606Z"
+    },
+    {
+      "description": "Desenvolvimento de aplicativo",
+      "category": "income",
+      "price": 40000,
+      "type": "income",
+      "createdAt": "2025-01-26T03:50:02.294Z",
+      "id": 3
+    },
+    {
+      "description": "Desenvolvimento de aplicativo",
+      "category": "income",
+      "price": 40000,
+      "type": "income",
+      "createdAt": "2025-01-26T03:50:04.463Z",
+      "id": 4
+    },
+    {
+      "description": "Energia",
+      "category": "oucome",
+      "price": 400,
+      "type": "autcome",
+      "createdAt": "2025-01-26T03:54:54.605Z",
+      "id": 5
+    },
+    {
+      "description": "pastel",
+      "category": "Alimentação",
+      "price": 5,
+      "type": "autcome",
+      "createdAt": "2025-01-26T04:09:36.799Z",
+      "id": 6
+    }
+  ]
 }
